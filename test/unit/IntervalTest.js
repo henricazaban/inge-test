@@ -51,3 +51,89 @@ describe("Interval - include", function () {
         });
     });
 });
+
+describe("Interval - union", function () {
+    testedInterval = new Interval(10, 20);
+
+    [
+        {
+            i : new Interval(15, 25),
+            r : new Interval(10,25)
+        },
+        {
+            i : new Interval(8, 12),
+            r : new Interval(8,20)
+        },
+        {
+            i : new Interval(8, 30),
+            r : new Interval(8, 30)
+        },
+        {
+            i : new Interval(12, 16),
+            r : new Interval(10, 20)
+        }
+    ].forEach(function (interval) {
+        it("interval union " + testedInterval.toString() + " and " + interval.i.toString(), function () {
+            var result = testedInterval.union(interval.i).toString();
+            console.log(result);
+            expect(result).toEqual(interval.r.toString());
+        });
+    });
+
+    [
+        new Interval(2, 8),
+        new Interval(22, 32)
+
+    ].forEach(function (interval) {
+        it("interval union Infaisable"),function(){
+            var f = function(){
+                testedInterval.union(interval)
+            }
+            expect(f).toThrow("Infaisable");
+        }
+
+    });
+});
+
+describe("Interval - intersection", function () {
+    testedInterval = new Interval(10, 20);
+
+    [
+        {
+            i : new Interval(15, 25),
+            r : new Interval(15,20)
+        },
+        {
+            i : new Interval(8, 12),
+            r : new Interval(10,12)
+        },
+        {
+            i : new Interval(8, 30),
+            r : new Interval(10, 20)
+        },
+        {
+            i : new Interval(12, 16),
+            r : new Interval(12, 16)
+        }
+    ].forEach(function (interval) {
+        it("interval intersection " + testedInterval.toString() + " and " + interval.i.toString(), function () {
+            var result = testedInterval.intersection(interval.i).toString();
+            console.log(result);
+            expect(result).toEqual(interval.r.toString());
+        });
+    });
+
+    [
+        new Interval(2, 8),
+        new Interval(22, 32)
+
+    ].forEach(function (interval) {
+        it("interval intersection Infaisable"),function(){
+            var f = function(){
+                testedInterval.intersection(interval)
+            }
+            expect(f).toThrow("Infaisable");
+        }
+
+    });
+});
