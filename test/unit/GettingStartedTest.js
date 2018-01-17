@@ -209,4 +209,12 @@ describe("sumPrime", function() {
     	expect(result).toEqual(j.r);
   	})	
   })
+
+  it("N négatif"),function(){
+  	var f = function(){
+  		Util.sumPrime(-10);
+  	}
+  	expect(f).toThrow("N négatif");
+  }
+
 });

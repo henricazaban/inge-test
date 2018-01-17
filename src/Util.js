@@ -88,12 +88,15 @@ Util.isPrime = function(n) {
  * @returns {number}
  */
 Util.sumPrime = function(n) {
+	if (n<0) {
+		throw "Nombre négatif";
+	}
 	if (n===2)
 		return 2;
 	if (Util.isPrime(n))
-		return n+sumPrime(n-1);
+		return n+Util.sumPrime(n-1);
 	else
-		return sumPrime(n-1);
+		return Util.sumPrime(n-1);
 };
 
 /**
