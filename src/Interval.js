@@ -23,7 +23,7 @@ Interval.prototype.overlaps = function (interval) {
  * @returns {boolean}
  */
 Interval.prototype.includes = function (interval) {
-
+	return this.end > interval.end && this.start < interval.start;
 };
 
 /**
@@ -32,7 +32,7 @@ Interval.prototype.includes = function (interval) {
  * @returns {Interval[]}
  */
 Interval.prototype.union = function (interval) {
-
+	
 };
 
 /**
