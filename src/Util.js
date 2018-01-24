@@ -113,6 +113,23 @@ Util.sumPrime = function(n) {
  */
 Util.fizzBuzz = function(n) {
 
+	if (n>0 && n<=100){
+		var tab = new Array(n);
+		for(var i=0; i<n; i++){
+			var j=i+1;
+			if(j%3==0 && j%5==0)
+				tab[i]="FizzBuzz";
+			else if(j%3==0)
+				tab[i]="Fizz";
+			else if(j%5==0)
+				tab[i]="Buzz";
+			else
+				tab[i]=j;
+		}
+		return tab;
+	}
+	else
+		throw "Impossible";
 };
 
 /**
@@ -125,5 +142,20 @@ Util.fizzBuzz = function(n) {
  * @returns {string}
  */
 Util.cipher = function (phrase) {
-
+	var tab = phrase.split('');
+	for(var i=0;i<tab.length;i++)
+	{
+		var car = tab[i];
+		if((car >= 'A' && car <= 'Z') || (car >= 'a' && car <= 'z'))
+		{
+			tab[i] = String.fromCharCode(car.charCodeAt(0)+1).charAt(0);
+		}
+	}
+	var ret = tab.join("");
+	console.log(ret);
+	return ret;
 };
+
+String.prototype.replaceAt=function(index, replacement) {
+    return this.substr(0, index) + replacement+ this.substr(index + replacement.length);
+}

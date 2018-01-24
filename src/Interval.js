@@ -47,7 +47,7 @@ Interval.prototype.intersection = function (interval) {
 	if(this.overlaps(interval))
 		return new Interval(Math.max(this.start,interval.start),Math.min(this.end,interval.end));
 	else
-		throw "Infaisable";
+		return null;
 };
 
 /**
@@ -56,7 +56,19 @@ Interval.prototype.intersection = function (interval) {
  * @returns {Interval[]}
  */
 Interval.prototype.exclusion = function (interval) {
-
+	var tab = new Array(2);
+	if (this.overlaps(interval)) 
+		{
+			tab[0]=new Interval(Math.min(this.start,interval.start),Math.max(this.start,interval.start));
+			tab[1]=new Interval(Math.min(this.end,interval.end),Math.max(this.end,interval.end));
+			return tab;
+		}
+	else
+		{
+			tab[0]=this;
+			tab[1]=interval;
+			return tab;
+		}
 };
 
 
