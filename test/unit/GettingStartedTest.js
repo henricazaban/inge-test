@@ -218,3 +218,63 @@ describe("sumPrime", function() {
   }
 
 });
+
+//[1, 2, "Fizz", 4, "Buzz", "Fizz", 7, 8, "Fizz", "Buzz", 11, "Fizz", 13, 14, "FizzBuzz"]
+
+describe("fizzBuzz", function() {
+  var i = [
+	  {
+	  	n:1,
+	  	r:[1]
+	  },
+	  {
+	  	n:5,
+	  	r:new Array(1,2,"Fizz",4,"Buzz")
+	  },
+	  {
+	  	n:10,
+	  	r:new Array(1, 2, "Fizz", 4, "Buzz", "Fizz", 7, 8, "Fizz", "Buzz")
+	  },
+	  {
+	  	n:15,
+	  	r:new Array(1, 2, "Fizz", 4, "Buzz", "Fizz", 7, 8, "Fizz", "Buzz", 11, "Fizz", 13, 14, "FizzBuzz")
+	  }
+  ];
+  i.forEach(function(j){
+  	it("n=" + j.n + " alors fizzBuzz = " + j.r , function() {
+    	var result = Util.fizzBuzz(j.n);
+    	expect(result).toEqual(j.r);
+  	})	
+  })
+
+  it("Impossible"),function(){
+  	var f = function(){
+  		Util.fizzBuzz(-10);
+  	}
+  	expect(f).toThrow("Impossible");
+  }
+
+});
+
+describe("cipher", function() {
+  var i = [
+	  {
+	  	n:"Test Unitaire",
+	  	r:"Uftu Vojubjsf"
+	  },
+  	  {
+	  	n:"Hello word",
+	  	r:"Ifmmp xpse"
+	  },
+	  {
+	  	n:"Bonjour",
+	  	r:"Cpokpvs"
+	  }
+  ];
+  i.forEach(function(j){
+  	it("n=" + j.n + " alors cipher = " + j.r , function() {
+    	var result = Util.cipher(j.n);
+    	expect(result).toEqual(j.r);
+  	})	
+  })
+});

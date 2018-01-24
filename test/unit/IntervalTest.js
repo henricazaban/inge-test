@@ -73,9 +73,8 @@ describe("Interval - union", function () {
             r : new Interval(10, 20)
         }
     ].forEach(function (interval) {
-        it("interval union " + testedInterval.toString() + " and " + interval.i.toString(), function () {
+        it("interval union " + testedInterval.toString() + " and " + interval.i.toString() + " : " + interval.r.toString(), function () {
             var result = testedInterval.union(interval.i).toString();
-            console.log(result);
             expect(result).toEqual(interval.r.toString());
         });
     });
@@ -116,24 +115,60 @@ describe("Interval - intersection", function () {
             r : new Interval(12, 16)
         }
     ].forEach(function (interval) {
-        it("interval intersection " + testedInterval.toString() + " and " + interval.i.toString(), function () {
+        it("interval intersection " + testedInterval.toString() + " and " + interval.i.toString() + " : " + interval.r.toString() , function () {
             var result = testedInterval.intersection(interval.i).toString();
-            console.log(result);
             expect(result).toEqual(interval.r.toString());
         });
     });
 
     [
-        new Interval(2, 8),
-        new Interval(22, 32)
-
-    ].forEach(function (interval) {
-        it("interval intersection Infaisable"),function(){
-            var f = function(){
-                testedInterval.intersection(interval)
-            }
-            expect(f).toThrow("Infaisable");
+        {
+            i : new Interval(2, 8),
+            r : null
+        },
+        {
+            i : new Interval(22, 32),
+            r : null
         }
 
+    ].forEach(function (interval) {
+        it("interval intersection " + testedInterval.toString() + " and " + interval.i.toString() + " : " + interval.r, function () {
+            var result = testedInterval.intersection(interval.i);
+            expect(result).toEqual(interval.r);
+        });
+    });
+});
+
+
+describe("Interval - exclusion", function () {
+    testedInterval = new Interval(10, 20);
+
+    [
+        {
+            i : new Interval(15, 25),
+            r : new Array(new Interval(10,15),new Interval(20,25))
+        },
+        {
+            i : new Interval(8, 12),
+            r : new Array(new Interval(8,10),new Interval(12,20))
+        },
+        {
+            i : new Interval(8, 30),
+            r : new Array(new Interval(8,10),new Interval(20,30))
+        },
+        {
+            i : new Interval(12, 16),
+            r : new Array(new Interval(10,12),new Interval(16,20))
+        },
+        {
+            i : new Interval(25, 40),
+            r : new Array(new Interval(10,20),new Interval(25,40))
+        }
+    ].forEach(function (interval) {
+        it("interval exclusion " + testedInterval.toString() + " and " + interval.i.toString() + " : " + interval.r.toString() , function () {
+            var result = testedInterval.exclusion(interval.i).toString();
+            var eq = interval.r[0].toString() + "," + interval.r[1].toString();
+            expect(result).toEqual(eq);
+        });
     });
 });
